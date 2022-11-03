@@ -6,9 +6,15 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const port = 80;
 
-// 
+// access web pages
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/pages/index.html');
+});
+app.get('/app/projects', (req, res) => {
+	res.sendFile(__dirname + '/pages/app/projects.html');
+});
+app.get('/app/project/new', (req, res) => {
+	res.sendFile(__dirname + '/pages/app/project/new.html');
 });
 
 // socket.io events

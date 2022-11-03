@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta name="description" content="Create breath-taking mods and texture packs within minutes with this online no-code tool." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CreaMC | Create Minecraft content easily." />
+    <meta property="og:description" content="Create breath-taking mods and texture packs within minutes with this online no-code tool." />
+    <meta property="og:url" content="http://localhost/" />
+    <meta property="og:site_name" content="CreaMC | Create Minecraft content easily." />
+    <meta name="theme-color" content="#000000">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CreaMC | Create Minecraft content easily." />
+    <meta name="twitter:description" content="Create breath-taking mods and texture packs within minutes with this online no-code tool." />
+    <meta name="twitter:image" content="https://preview.redd.it/3du296x7wen51.png?auto=webp&s=40359c7a7fe8f247de3155bddd12fe55a5415725" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>CreaMc | Create Minecraft content easily.</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Red Hat Display', sans-serif;
+        }
+        body{
+            background-color: #000;
+            color: white;
+        }
+        nav{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            border-radius: 5px;
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, .15);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        nav img{
+            height: 45px;
+            width: 45px;
+            margin-right: 10px;
+        }
+        nav ul{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+        nav ul li{
+            height: 100%;
+            padding: 0px 10px;
+        }
+        nav ul li a{
+            height: 100%;
+            font-size: 15px;
+            color: rgba(255, 255, 255, .25);
+            text-decoration: none;
+            font-weight: 200;
+            transition: color .25s;
+        }
+        nav ul li.selected a{
+            color: rgba(255, 255, 255, .75);
+        }
+        nav ul li a:hover, nav ul li a:active{
+            color: rgba(255, 255, 255, .5);
+        }
+
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: calc(100vh/3*2);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 0.01%, #000000 100%), center / cover no-repeat url('https://preview.redd.it/3du296x7wen51.png?auto=webp&s=40359c7a7fe8f247de3155bddd12fe55a5415725');
+        }
+        header h1{
+            font-family: 'Montserrat';
+            margin-top: -20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-weight: 900;
+            font-size: 75px;
+        }
+        header p{
+            margin-top: -10px;
+            margin-bottom: 50px;
+            width: 460px;
+            color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-weight: 400;
+            font-size: 20px;
+        }
+
+        .button-list{
+            display: flex;
+            flex-direction: row;
+        }
+        .button-list>*{
+            margin: 0 10px;
+        }
+        .button{
+            width: 220px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-color: #2E2E2E;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+        }
+        .button.main{
+            color: black;
+            font-weight: 700;
+            font-size: 17px;
+            background: linear-gradient(98.05deg, #9E00FF 0%, #0094FF 25.52%, #00FFA3 52.6%, #FF8A00 76.04%, #FF003D 100%);
+        }
+        .button.sp{
+            color: black;
+            font-weight: 700;
+            font-size: 17px;
+            background: linear-gradient(98.05deg, #9E00FF 0%, #0094FF 25.52%, #00FFA3 52.6%, #FF8A00 76.04%, #FF003D 100%);
+            width: 332px;
+            margin-top: 35px;
+        }
+
+        section{
+            height: calc(100vh/3*2);
+            width: calc(100vw - 240px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: right;
+            padding: 0 120px;
+        }
+        section h2{
+            font-family: 'Montserrat', sans-serif;
+            font-size: 50px;
+            display: flex;
+            align-items: flex-end;
+            text-align: right;
+            font-weight: 900;
+            width: 40vw;
+            color: rgba(255, 255, 255, 1);
+        }
+        section p{
+            font-size: 20px;
+            display: flex;
+            align-items: flex-end;
+            text-align: right;
+            font-weight: 400;
+            width: 40vw;
+            color: rgba(255, 255, 255, 0.75);
+        }
+        section.main{
+            background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(98.05deg, #9E00FF 0%, #0094FF 25.52%, #00FFA3 52.6%, #FF8A00 76.04%, #FF003D 100%);
+        }
+        section.main h2, section.main p{
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+        }
+        section img{
+            height: 450px;
+        }
+        section.end{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+        section.end h3, section.end p{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        section.end p{
+            max-width: 460px;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 400;
+            font-size: 20px;
+        }
+        section.end h3{
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            font-weight: 900;
+            font-size: 50px;
+        }
+        section.end .content{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 10;
+        }
+        section.end .fx{
+            background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0) 0%, #000000 100%), linear-gradient(98.05deg, #9E00FF 0%, #0094FF 25.52%, #00FFA3 52.6%, #FF8A00 76.04%, #FF003D 100%);
+            position: absolute;
+            opacity: 0.25;
+            height: 75%;
+            aspect-ratio: 1/1;
+            z-index: 0;
+        }
+
+        footer{
+            width: 100vw;
+            height: 300px;
+            background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.75) 100%), center / cover no-repeat url('https://preview.redd.it/3du296x7wen51.png?auto=webp&s=40359c7a7fe8f247de3155bddd12fe55a5415725');
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+        footer .top{
+            width: calc(100vw - 120px);
+            display: flex;
+            justify-content: space-between;
+        }
+        footer .top .left{
+            display: flex;
+        }
+        footer .top .left>div{
+            padding-right: 100px;
+        }
+        footer .top .left>div h4{
+            font-family: 'Montserrat';
+            font-weight: 700;
+            font-size: 20px;
+            color: #fff;
+        }
+        footer .top .left>div a{
+            font-weight: 400;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition-duration: .15s;
+        }
+        footer .top .left>div a:hover, footer .top .left>div a:focus{
+            color: rgba(255, 255, 255, 1);
+        }
+        footer .top .left ul{
+            list-style-type: none;
+        }
+        footer .top .left li{
+            margin-bottom: -7.5px;
+        }
+        .animate__animated{
+            animation-duration: 1s;
+            animation-delay: .5s;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="/images/branding/icon.svg" alt="CreaMc">
+        <ul>
+            <li class="selected"><a href="">Home</a></li>
+            <li><a href="">Setup</a></li>
+            <li><a href="">Documentation</a></li>
+        </ul>
+    </nav>
+    <header>
+        <img class="animate__animated animate__jackInTheBox" src="/images/branding/iconBig.svg" alt="CreaMc">
+        <h1 class="animate__animated animate__fadeInUp">CreaMc</h1>
+        <p class="animate__animated animate__fadeInUp">Create breath-taking mods and texture packs within minutes with this online no-code tool.</p>
+        <div class="button-list">
+            <a class="button main animate__animated animate__fadeInBottomLeft" href="/app/projects">Get started</a>
+            <a class="button animate__animated animate__fadeInBottomRight" href="">Log-in</a>
+        </div>
+    </header>
+    <section class="black animate__animated animate__fadeInUp">
+        <div class="left">
+            <img src="/images/illustrations/powerful.png" alt="Most powerful Minecraft modding tools">
+        </div>
+        <div class="right">
+            <h2>Most powerful Minecraft modding tools</h2>
+            <p>I created all the tools you need to make your next AAA in Minecraft, from the game engine to the texture editor, everything you need for the basic needs to complete masterpieces. Stop trying to buy a new PC to run Java environements, we do it for you.</p>
+        </div>
+    </section>
+    <section class="main">
+        <div class="left">
+            <h2>The best version support you could ever get</h2>
+            <p>When you create a mod or resource pack, you can easily export it to all Minecraft versions and framework. You’ll never have to try to rewrite all of your mod to convert it from a version to another. You can also easily post all of your projects on curseforge and FruitsMC.</p>
+        </div>
+        <div class="right">
+            <img src="/images/illustrations/bestSupport.png" alt="The best version support you could ever get">
+        </div>
+    </section>
+    <section class="end">
+        <div class="fx"></div>
+        <div class="content">
+            <h3>What are you waiting?</h3>
+            <p>Create breath-taking mods within minutes with this tool right now for free.</p>
+            <a href="/app/projects" class="button sp">Get started for FREE</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="top">
+            <div class="left">
+                <div>
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="">CreaMC</a></li>
+                        <li><a href="">WafleJs</a></li>
+                        <li><a href="">Mod maker</a></li>
+                        <li><a href="">Texture pack maker</a></li>
+                        <li><a href="">Plugin maker</a></li>
+                        <li><a href="">Minecraft tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="">About Lolou's Studio</a></li>
+                        <li><a href="">Design assets</a></li>
+                        <li><a href="">Terms of use</a></li>
+                        <li><a href="">Privacy policy</a></li>
+                        <li><a href="">Contact me</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Comunity</h4>
+                    <ul>
+                        <li><a href="">CreaMC blog</a></li>
+                        <li><a href="">Get some hewlp</a></li>
+                        <li><a href="">Super secret page</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                <img src="/images/branding/full.png" alt="CreaMc" style="opacity:.5">
+            </div>
+        </div>
+        <div class="bottom" style="position: absolute; bottom: 20px; z-index:100;display: flex;flex-direction: column;align-items: center;justify-content: center;">
+            <img src="/images/branding/watermarks.png" alt="Lolou's Studio • WaffleJs • copyright Lolou's Studio al rights reserved • header and footer image by u/AnidaTaco on Reddit, all rights reserved">
+            <p style="font-size: 12px; color: rgba(255, 255, 255, .5);margin-top: 10px;">Copyright Lolou's Studio all rights reserved • header and footer image by u/AnidaTaco on Reddit</p>
+        </div>
+    </footer>
+</body>
+</html>

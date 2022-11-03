@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>CreaMC • My projects</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Red Hat Display', sans-serif;
+        }
+        .app{
+            background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.75) 100%),
+            center / cover no-repeat url('https://preview.redd.it/3du296x7wen51.png?auto=webp&s=40359c7a7fe8f247de3155bddd12fe55a5415725');
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding-top:100px;
+            padding-left: 50px;
+        }
+        nav{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            border-radius: 5px;
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, .15);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        nav img{
+            height: 45px;
+            width: 45px;
+            margin-right: 10px;
+        }
+        nav ul{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+        nav ul li{
+            height: 100%;
+            padding: 0px 10px;
+        }
+        nav ul li a{
+            height: 100%;
+            font-size: 15px;
+            color: rgba(255, 255, 255, .25);
+            text-decoration: none;
+            font-weight: 200;
+            transition: color .25s;
+        }
+        nav ul li.selected a{
+            color: rgba(255, 255, 255, .75);
+        }
+        nav ul li a:hover, nav ul li a:active{
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .prj-card p{
+            font-size: 15px;
+            margin-top: 15px;
+            text-align: center;
+            width: 90%;
+        }
+
+        .prj-card{
+            font-size: 50px;
+            color: white;
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, .15);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 175px;
+            display: flex;
+            flex-direction: column;
+            margin-right: 15px;
+            transition-duration: .25s;
+            cursor: pointer;
+            position: relative;
+        }
+        .prj-card i.cloud{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px;
+            font-size: 15px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, .25);
+            color: black;
+        }
+        .prj-card:hover{
+            background-color: rgba(255, 255, 255, .25);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .prj-card:active{
+            background-color: rgba(255, 255, 255, .5);
+            transform: scale(.95);
+        }
+
+        .filter{
+            margin-top: 50px;
+            display: flex;
+            width: 100vw;
+        }
+        .filter input{
+            display: flex;
+            align-items: center;
+            color: white;
+            background-color: transparent;
+            height: 35px;
+            border: none;
+            outline: none;
+        }
+        .type-chip{
+            display: flex;
+            align-items: center;
+            color: white;
+            border-radius: 90px;
+            background: rgba(255, 255, 255, .15);
+            margin-right: 15px;
+            padding-right: 15px;
+            height: 35px;
+            transition-duration: .25s;
+            cursor: pointer;
+        }
+        .type-chip:hover{
+            background: rgba(255, 255, 255, .25);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .type-chip i{
+            height: 35px;
+            width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background-color: rgba(255, 255, 255, .25);
+            border-radius: 90px;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        .type-chip.active{
+            background: linear-gradient(98.05deg, rgba(158, 0, 255, .5) 0%, rgba(0, 148, 255, .5) 25.52%, rgba(0, 255, 163, .5) 52.6%, rgba(255, 138, 0, .5) 76.04%, rgba(255, 0, 61, .5) 100%);
+        }
+        .type-chip.active:hover{
+            opacity: .75;
+        }
+        .drawer{
+            width: 100vw;
+            margin-top: 25px;
+            display: flex;
+        }
+
+        .infoBox{
+            position: fixed;
+            display: flex;
+            align-items: center;
+            color: white;
+            border-radius: 90px;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(20px);
+            margin-right: 15px;
+            padding-right: 15px;
+            height: 35px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity .25s;
+        }
+        .infoBox i{
+            height: 35px;
+            width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background-color: rgba(255, 255, 255, .25);
+            border-radius: 90px;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="/images/branding/icon.svg" alt="CreaMc">
+        <ul>
+            <li class="selected"><a href="/app/projects">Projects</a></li>
+            <li><a href="/app/settings/account">My account</a></li>
+            <li><a href="/app/project/new">Create new project</a></li>
+        </ul>
+    </nav>
+
+    <div class="app">
+        <div class="filter">
+            <div class="type-chip">
+                <i class="ph-magnifying-glass-fill"></i>
+                <input onkeyup="ckeckSearch(this)" type="text" placeholder="Search">
+            </div>
+            <div id="texture-pack" class="type-chip chipchip">
+                <i class="ph-paint-brush-broad-fill"></i>
+                <p>texture packs</p>
+            </div>
+            <div id="addon" class="type-chip chipchip">
+                <i class="ph-puzzle-piece-fill"></i>
+                <p>addons</p>
+            </div>
+            <div id="game-mod" class="type-chip chipchip">
+                <i class="ph-globe-simple-fill"></i>
+                <p>game mods</p>
+            </div>
+            <div id="skin-pack" class="type-chip chipchip">
+                <i class="ph-person-fill"></i>
+                <p>skin packs</p>
+            </div>
+            <div id="mashup" class="type-chip chipchip">
+                <i class="ph-folders-fill"></i>
+                <p>mashups</p>
+            </div>
+            <div id="true" class="type-chip cloudcloud">
+                <i class="ph-eye-fill"></i>
+                <p>public</p>
+            </div>
+            <div id="false" class="type-chip cloudcloud">
+                <i class="ph-eye-slash-fill"></i>
+                <p>private</p>
+            </div>
+        </div>
+
+        <div class="drawer"></div>
+
+    </div>
+    <div class="infoBox">
+        <i class="ph-info-fill"></i>
+        <p>Info box is useful!</p>
+    </div>
+    <script>
+        let settings = {
+            tooltips:false
+        }
+
+        let projects = [
+            {
+                name:"Hypixel lootboxes",
+                type:"addon",
+                isPublished: false
+            },
+            {
+                name:"Hypixel racing cars",
+                type:"texture-pack",
+                isPublished: true
+            },
+            {
+                name:"Hypixel server",
+                type:"mashup",
+                isPublished: true
+            },
+            {
+                name:"Hypixel main",
+                type:"texture-pack",
+                isPublished: false
+            },
+            {
+                name:"Optifine",
+                type:"addon",
+                isPublished: true
+            },
+            {
+                name:"Foxes skin pack",
+                type:"skin-pack",
+                isPublished: true
+            },
+            {
+                name:"Mario Kart",
+                type:"game-mod",
+                isPublished: false
+            }
+        ]
+
+        let searchQuery = {search:"", filter:[], isPublished:[]};
+        function refreshSearch(){
+            searchQuery.filter = null;
+            searchQuery.filter = [];
+            searchQuery.isPublished = null;
+            searchQuery.isPublished = [];
+            
+            document.querySelector('.drawer').innerHTML = "";
+            
+            document.querySelectorAll('.type-chip.chipchip.active').forEach((elem)=>{
+                searchQuery.filter.push(elem.id);
+            });
+            document.querySelectorAll('.type-chip.cloudcloud.active').forEach((elem)=>{
+                searchQuery.isPublished.push(elem.id);
+            });
+            var showTooltip = null;
+            projects.forEach((elem)=>{
+                if (!searchQuery.filter.includes(elem.type) && searchQuery.filter.length != 0){
+                    return
+                }
+                if (!elem.name.toLowerCase().includes(searchQuery.search.toLowerCase())){
+                    return
+                }
+                if (elem.isPublished+"" != searchQuery.isPublished[0] && searchQuery.isPublished.length == 1){
+                    return
+                }
+                var icon = 'ph-question-fill';
+                var color = 'white';
+                var publishColor = 'white';
+                var publishIcon = 'ph-question-fill';
+                switch(elem.type){
+                    case 'addon':
+                        color = '#00FFA3';
+                        icon = 'ph-puzzle-piece-fill';
+                        break;
+                    case 'game-mod':
+                        color = '#0094FF';
+                        icon = 'ph-globe-simple-fill';
+                        break;
+                    case 'texture-pack':
+                        color = '#FF8A00';
+                        icon = 'ph-paint-brush-broad-fill';
+                        break;
+                    case 'skin-pack':
+                        color = '#9E00FF';
+                        icon = 'ph-person-fill';
+                        break;
+                    case 'mashup':
+                        color = '#FF003D';
+                        icon = 'ph-folders-fill';
+                        break;
+                }
+                switch(elem.isPublished){
+                    case true:
+                        publishColor = '#00FFA3';
+                        break;
+                    case false:
+                        publishColor = 'rgba(255, 255, 255, .25)';
+                        break;
+                }
+                document.querySelector('.drawer').innerHTML += `
+                    <div class="prj-card">
+                        <i class="cloud" style="background-color:${publishColor};"></i>
+                        <i class="${icon}" style="color:${color};"></i>
+                        <p>${elem.name}</p>
+                    </div>`;
+
+                if (!settings.tooltips){
+                    return
+                }
+                document.querySelectorAll(".prj-card .cloud").forEach((elem)=>{
+                    elem.addEventListener('mousemove', (e)=>{
+                        clearTimeout(showTooltip);
+                        document.querySelector('.infoBox p').innerText = 'Indicate if your project is public or not.';
+                        document.querySelector('.infoBox').style.opacity = 1;
+                        showTooltip = setTimeout(()=>{
+                            document.querySelector('.infoBox').style.opacity = 0;
+                        }, 1000);
+                    });
+                });
+            });
+            if (document.querySelector('.drawer').innerHTML == "" || document.querySelector('.drawer').innerHTML == null && projects.length != 0){
+                document.querySelector('.drawer').innerHTML = ` <div class="prj-card">
+                        <i class="ph-barricade-fill" style="color:orange;"></i>
+                        <p>Oups... No projects found !</p>
+                    </div>`;
+            }
+            if (projects.length == 0){
+                document.querySelector('.drawer').innerHTML = ` <div class="prj-card">
+                        <i class="ph-file-plus-fill" style="color:#00FFA3;"></i>
+                        <p>Create your first project here !</p>
+                    </div>`;
+            }
+        }
+        refreshSearch();
+
+        function ckeckSearch(elem){
+            if (elem.value.length >= 0){
+                elem.parentNode.classList.add("active");
+            }
+            if (elem.value.length == 0){
+                elem.parentNode.classList.remove("active");
+            }
+            searchQuery.search = elem.value;
+            refreshSearch();
+        }
+
+        document.querySelectorAll(".type-chip.chipchip").forEach((elem)=>{
+            elem.addEventListener('click', (e)=>{
+                e.currentTarget.classList.toggle('active');
+                refreshSearch();
+
+            });
+        });
+        document.querySelectorAll(".type-chip.cloudcloud").forEach((elem)=>{
+            elem.addEventListener('click', (e)=>{
+                e.currentTarget.classList.toggle('active');
+                refreshSearch();
+            });
+        });
+        document.body.addEventListener('mousemove', (e)=>{
+            if (!settings.tooltips){
+                return
+            }
+            document.querySelector('.infoBox').style.top = (e.clientY + 20) + "px";
+            document.querySelector('.infoBox').style.left = (e.clientX + 20) + "px";
+        });
+        
+    </script>
+</body>
+</html>
